@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ms" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orchestra AI-Agent Tutorial | Belajar Bina Ejen Autonomi 2026</title>
+    <meta name="description" content="Tutorial hands-on pembinaan ejen AI autonomi merentas Google Gemini, Anthropic Claude, dan DeepSeek. Panduan lengkap 7-fail framework untuk semua peringkat.">
+    <meta name="keywords" content="AI agent, tutorial, Google AI Studio, Anthropic Claude, DeepSeek, MCP, Antigravity, MoE, orkestrasi ejen, Malaysia, 2026">
+    <meta name="author" content="State of Protocol">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎻</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Orchestra AI-Agent Tutorial">
+    <meta property="og:description" content="Tutorial hands-on ejen AI autonomi. Percuma, sumber terbuka, komprehensif.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://state-of-protocol.github.io/AI-Orchestration-Tutorial/">
+    <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><rect fill='%230d1117' width='1200' height='630'/><text x='600' y='280' text-anchor='middle' fill='%23e6edf3' font-family='Inter,sans-serif' font-size='72' font-weight='bold'>🎻 Orchestra</text><text x='600' y='360' text-anchor='middle' fill='%238b949e' font-family='Inter,sans-serif' font-size='36'>AI-Agent Tutorial</text><text x='600' y='420' text-anchor='middle' fill='%2358a6ff' font-family='Inter,sans-serif' font-size='24'>Google Gemini · Claude · DeepSeek</text></svg>">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orchestra AI-Agent Tutorial">
+    <meta name="twitter:description" content="Belajar bina ejen AI autonomi. Google Gemini, Claude, DeepSeek.">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalProduct",
+        "name": "Orchestra AI-Agent Tutorial",
+        "description": "Tutorial komprehensif untuk membina dan mengorkestrasi ejen AI autonomi menggunakan Google AI Studio, Anthropic Claude, dan DeepSeek.",
+        "provider": {
+            "@type": "Organization",
+            "name": "State of Protocol",
+            "url": "https://github.com/state-of-protocol"
+        },
+        "audience": {
+            "@type": "EducationalAudience",
+            "educationalRole": "pemaju perisian, jurutera AI, pelajar sains komputer"
+        },
+        "teaches": "Pembinaan ejen AI, orkestrasi, MCP, Antigravity, MoE, Chain-of-Thought",
+        "inLanguage": "ms",
+        "datePublished": "2026-05-25"
+    }
+    </script>
+</head>
+<body>
+    <!-- ============================================================ -->
+    <!-- NOTIFICATION CONTAINER -->
+    <!-- ============================================================ -->
+    <div id="notification-container" aria-live="polite"></div>
+
+    <!-- ============================================================ -->
+    <!-- HEADER & NAVIGASI UTAMA -->
+    <!-- ============================================================ -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="logo" aria-label="Orchestra AI-Agent Tutorial - Laman Utama">
+                <span class="logo-icon">🎻</span>
+                <span class="logo-text">Orchestra AI</span>
+            </a>
+            <nav class="main-nav" aria-label="Navigasi utama">
+                <ul>
+                    <li><a href="#" class="active" data-platform="google">🏛️ Google</a></li>
+                    <li><a href="#" data-platform="claude">🦉 Claude</a></li>
+                    <li><a href="#" data-platform="deepseek">🐉 DeepSeek</a></li>
+                    <li><a href="#comparison">📊 Perbandingan</a></li>
+                    <li><a href="#calculator">💰 Kalkulator</a></li>
+                    <li><a href="#demo">🖥️ Demo</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button id="theme-toggle" class="btn-icon" aria-label="Tukar tema" aria-pressed="true">☀️</button>
+                <a href="https://github.com/state-of-protocol/AI-Orchestration-Tutorial" class="btn btn-github" target="_blank" rel="noopener noreferrer">
+                    ⭐ GitHub
+                </a>
+            </div>
+            <!-- Mobile menu button (visible on small screens) -->
+            <button class="mobile-menu-toggle" aria-label="Buka menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- ============================================================ -->
+        <!-- HERO SECTION -->
+        <!-- ============================================================ -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>
+                            <span class="hero-pretitle">Belajar Bina & Orkestrasi</span>
+                            <span class="hero-title-main">Ejen AI Autonomi</span>
+                            <span class="hero-subtitle">Tutorial hands-on merentas tiga platform dominan 2026</span>
+                        </h1>
+                        <p class="hero-description">
+                            Kuasai seni membina <strong>Managed Agents</strong> (Google), 
+                            <strong>Multi-Agent Dev Teams</strong> (Claude), dan 
+                            <strong>High-Efficiency Reasoning</strong> (DeepSeek) — semuanya dengan satu rangka kerja 7-fail yang seragam.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="#platform-overview" class="btn btn-primary btn-lg">Mulakan Pembelajaran</a>
+                            <a href="https://github.com/state-of-protocol/AI-Orchestration-Tutorial#readme" class="btn btn-outline btn-lg" target="_blank" rel="noopener">📖 Baca Dokumentasi</a>
+                        </div>
+                        <div class="hero-badges">
+                            <span class="badge">🆓 Sumber Terbuka</span>
+                            <span class="badge">🇲🇾 Dibina di Malaysia</span>
+                            <span class="badge">📅 Dikemas kini Mei 2026</span>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <!-- Ilustrasi abstrak untuk orkestrasi -->
+                        <div class="orchestra-diagram" aria-hidden="true">
+                            <div class="node google-node">G</div>
+                            <div class="node claude-node">C</div>
+                            <div class="node deepseek-node">D</div>
+                            <svg class="connection-lines" viewBox="0 0 200 200">
+                                <line x1="40" y1="30" x2="100" y2="170" stroke="currentColor" stroke-width="2" stroke-dasharray="4,4" />
+                                <line x1="100" y1="170" x2="160" y2="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4,4" />
+                                <line x1="40" y1="30" x2="160" y2="30" stroke="currentColor" stroke-width="2" stroke-dasharray="4,4" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- PLATFORM OVERVIEW CARDS -->
+        <!-- ============================================================ -->
+        <section id="platform-overview" class="platforms-section">
+            <div class="container">
+                <h2 class="section-title">Tiga Platform, Satu Rangka Kerja</h2>
+                <p class="section-subtitle">Pilih laluan pembelajaran anda. Setiap "Akademi" adalah bebas tetapi mengikut struktur 7-fail yang sama.</p>
+                <div class="platform-cards-grid">
+                    <!-- Google Card -->
+                    <article class="platform-card highlighted" data-platform="google" id="google-section">
+                        <div class="card-badge">🏛️ Managed Infrastructure</div>
+                        <h3>Google AI Studio</h3>
+                        <div class="card-model">Gemini 3.5 Flash / Pro</div>
+                        <ul class="card-features">
+                            <li>✅ Managed Agents (Antigravity)</li>
+                            <li>✅ Konteks 1M token</li>
+                            <li>✅ Integrasi Google Workspace</li>
+                            <li>✅ Sandbox Linux automatik</li>
+                            <li>✅ Multimodal (video, audio, imej)</li>
+                        </ul>
+                        <a href="#" class="btn btn-platform" data-platform="google">🧪 Mulakan Trek Google</a>
+                    </article>
+
+                    <!-- Claude Card -->
+                    <article class="platform-card" data-platform="claude" id="claude-section">
+                        <div class="card-badge">🦉 Precision & Control</div>
+                        <h3>Anthropic Claude</h3>
+                        <div class="card-model">Claude Opus 4.7 / Sonnet 5</div>
+                        <ul class="card-features">
+                            <li>✅ Adaptive Thinking</li>
+                            <li>✅ Multi-Agent Dev Teams</li>
+                            <li>✅ Model Context Protocol (MCP)</li>
+                            <li>✅ Kawalan komputer langsung</li>
+                            <li>✅ Kejuruteraan perisian ketat</li>
+                        </ul>
+                        <a href="#" class="btn btn-platform" data-platform="claude">🦉 Mulakan Trek Claude</a>
+                    </article>
+
+                    <!-- DeepSeek Card -->
+                    <article class="platform-card" data-platform="deepseek" id="deepseek-section">
+                        <div class="card-badge">🐉 Ultra Efficiency</div>
+                        <h3>DeepSeek</h3>
+                        <div class="card-model">DeepSeek V4-Pro / R1</div>
+                        <ul class="card-features">
+                            <li>✅ MoE 1.6T parameter (6 aktif/token)</li>
+                            <li>✅ 1M konteks dengan Engram Memory</li>
+                            <li>✅ Harga 10× lebih murah</li>
+                            <li>✅ Chain-of-Thought (R1)</li>
+                            <li>✅ Diskaun kekal 75% (Mei 2026)</li>
+                        </ul>
+                        <a href="#" class="btn btn-platform" data-platform="deepseek">🐉 Mulakan Trek DeepSeek</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- COMPARISON MATRIX (INTERAKTIF) -->
+        <!-- ============================================================ -->
+        <section id="comparison" class="comparison-section">
+            <div class="container">
+                <h2 class="section-title">📊 Matriks Perbandingan Terperinci</h2>
+                <p class="section-subtitle">Gunakan penapis untuk fokus pada keperluan projek anda.</p>
+                
+                <!-- Filter Buttons -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all" aria-pressed="true">Semua</button>
+                    <button class="filter-btn" data-filter="google" aria-pressed="false">🏛️ Google</button>
+                    <button class="filter-btn" data-filter="claude" aria-pressed="false">🦉 Claude</button>
+                    <button class="filter-btn" data-filter="deepseek" aria-pressed="false">🐉 DeepSeek</button>
+                    <button class="filter-btn" data-filter="cost" aria-pressed="false">💰 Kos</button>
+                    <button class="filter-btn" data-filter="agents" aria-pressed="false">🤖 Ejen</button>
+                </div>
+
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Ciri / Platform</th>
+                                <th>🏛️ Google AI Studio</th>
+                                <th>🦉 Anthropic Claude</th>
+                                <th>🐉 DeepSeek</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="comparison-row" data-tags="google claude deepseek all">
+                                <td><strong>Model Utama (2026)</strong></td>
+                                <td>Gemini 3.5 Flash / Pro</td>
+                                <td>Claude Opus 4.7 / Sonnet 5</td>
+                                <td>DeepSeek V4-Pro / R1</td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="google claude deepseek all">
+                                <td><strong>Tetingkap Konteks</strong></td>
+                                <td>1M token</td>
+                                <td>1M token (128K output)</td>
+                                <td>1M token</td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="agents google">
+                                <td><strong>Sistem Ejen Asli</strong></td>
+                                <td>Antigravity 2.0 + Managed Agents API</td>
+                                <td>Dev Teams (Coordinator→Coder→Reviewer) + Claude Code</td>
+                                <td>Engram Conditional Memory</td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="agents claude">
+                                <td></td>
+                                <td></td>
+                                <td>Dev Teams (Coordinator→Coder→Reviewer) + Claude Code</td>
+                                <td></td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="agents deepseek">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Engram Conditional Memory</td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="cost google">
+                                <td><strong>Harga Input (1M token)</strong></td>
+                                <td>$0.15 (Flash) / $1.25 (Pro)</td>
+                                <td>$3.00 (Sonnet) / $15.00 (Opus)</td>
+                                <td><strong>$0.015</strong> (V4-Pro) / $0.55 (R1)</td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="cost claude">
+                                <td></td>
+                                <td></td>
+                                <td>$3.00 (Sonnet) / $15.00 (Opus)</td>
+                                <td></td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="cost deepseek">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>$0.015</strong> (V4-Pro) / $0.55 (R1)</td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="google">
+                                <td><strong>Fokus Industri</strong></td>
+                                <td>Mudah alih, Workspace, Multimodal</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="claude">
+                                <td></td>
+                                <td></td>
+                                <td>Kejuruteraan Perisian, Analisis Kewangan</td>
+                                <td></td>
+                            </tr>
+                            <tr class="comparison-row" data-tags="deepseek">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Automasi Skala Besar, Matematik & Kod</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Petunjuk platform aktif (diurus oleh JS) -->
+                <div class="comparison-legend">
+                    <span class="legend-dot google-dot"></span> Google &nbsp;
+                    <span class="legend-dot claude-dot"></span> Claude &nbsp;
+                    <span class="legend-dot deepseek-dot"></span> DeepSeek
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- INTERACTIVE COST CALCULATOR -->
+        <!-- ============================================================ -->
+        <section id="calculator" class="calculator-section">
+            <div class="container">
+                <h2 class="section-title">💰 Kalkulator Kos Token</h2>
+                <p class="section-subtitle">Anggarkan kos API untuk projek ejen anda.</p>
+                
+                <div class="calculator-card" id="cost-calculator">
+                    <div class="calculator-grid">
+                        <!-- Input Panel -->
+                        <div class="calc-inputs">
+                            <div class="form-group">
+                                <label for="calc-platform">Platform</label>
+                                <select id="calc-platform" class="form-select">
+                                    <option value="google">🏛️ Google Gemini 3.5 Flash</option>
+                                    <option value="googlePro">🏛️ Google Gemini 3.5 Pro</option>
+                                    <option value="claudeSonnet">🦉 Claude Sonnet 5</option>
+                                    <option value="claudeOpus">🦉 Claude Opus 4.7</option>
+                                    <option value="deepseek" selected>🐉 DeepSeek V4-Pro</option>
+                                    <option value="deepseekR1">🐉 DeepSeek R1</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="calc-input-tokens">Token Input</label>
+                                <input type="number" id="calc-input-tokens" class="form-input" value="10000" min="0" max="10000000" step="1000">
+                                <input type="range" id="calc-input-range" class="form-range" value="10000" min="0" max="10000000" step="1000" aria-label="Julat token input">
+                            </div>
+                            <div class="form-group">
+                                <label for="calc-output-tokens">Token Output</label>
+                                <input type="number" id="calc-output-tokens" class="form-input" value="2000" min="0" max="1000000" step="100">
+                                <input type="range" id="calc-output-range" class="form-range" value="2000" min="0" max="1000000" step="100" aria-label="Julat token output">
+                            </div>
+                            <div class="form-group">
+                                <label class="toggle-label">
+                                    <input type="checkbox" id="calc-cache-toggle" class="toggle-input">
+                                    <span class="toggle-slider"></span>
+                                    Gunakan Cache (jimat ~80%)
+                                </label>
+                            </div>
+                            <div class="preset-buttons">
+                                <span class="preset-label">Pratetap:</span>
+                                <button class="preset-btn" data-input="5000" data-output="500">Kecil</button>
+                                <button class="preset-btn" data-input="100000" data-output="5000">Sederhana</button>
+                                <button class="preset-btn" data-input="1000000" data-output="50000">Besar</button>
+                            </div>
+                        </div>
+                        <!-- Results Panel -->
+                        <div class="calc-results">
+                            <div class="result-card">
+                                <h3>Anggaran Kos</h3>
+                                <div class="result-value" id="calc-result-usd">$0.00</div>
+                                <div class="result-myr" id="calc-result-myr">RM 0.00</div>
+                                <div class="result-note" id="calc-savings-note"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- STREAMING DEMO SECTION -->
+        <!-- ============================================================ -->
+        <section id="demo" class="demo-section">
+            <div class="container">
+                <h2 class="section-title">🖥️ Demo Penstriman Ejen</h2>
+                <p class="section-subtitle">Lihat bagaimana ejen "berfikir" dan bertindak secara langsung.</p>
+                
+                <div class="demo-container" id="streaming-demo">
+                    <div class="demo-controls">
+                        <div class="form-group">
+                            <label for="demo-platform">Pilih Platform</label>
+                            <select id="demo-platform" class="form-select">
+                                <option value="google">🏛️ Google AI Studio (Managed Agent)</option>
+                                <option value="claude">🦉 Anthropic Claude (Multi-Agent)</option>
+                                <option value="deepseek">🐉 DeepSeek (MoE + R1)</option>
+                            </select>
+                        </div>
+                        <div class="demo-buttons">
+                            <button id="demo-start" class="btn btn-primary">▶️ Mula Demonstrasi</button>
+                            <button id="demo-stop" class="btn btn-outline" disabled>⏹️ Hentikan</button>
+                        </div>
+                        <div id="demo-steps" class="demo-steps-indicator" aria-live="polite"></div>
+                        <div id="demo-cost" class="demo-cost" aria-live="polite">💰 Kos: $0.00</div>
+                    </div>
+                    <div class="demo-output">
+                        <!-- Thinking Block (dikawal oleh JS) -->
+                        <div id="demo-thinking" class="thinking-block" data-expanded="false" style="display:none;">
+                            <div class="thinking-header" tabindex="0" role="button" aria-expanded="false">
+                                🧠 Proses Pemikiran <span class="thinking-toggle-icon">▼</span>
+                            </div>
+                            <div class="thinking-content"></div>
+                        </div>
+                        <!-- Output Stream -->
+                        <div id="demo-output" class="stream-output" aria-live="polite">
+                            <!-- Langkah-langkah akan muncul di sini -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIBE CODE PLAYGROUND (CLOUD + LOCAL) -->
+        <!-- ============================================================ -->
+        <section id="vibe-code" class="playground-section">
+            <div class="container">
+                <h2 class="section-title">🧪 Vibe Code Playground</h2>
+                <p class="section-subtitle">Tulis atau edit kod ejen dan jalankan dalam dua mod: Cloud (API sebenar) atau Local (simulasi).</p>
+                
+                <div class="playground-container">
+                    <!-- Mode Selector -->
+                    <div class="pg-mode-bar">
+                        <button class="pg-mode-btn active" data-mode="cloud">☁️ Cloud (API Sebenar)</button>
+                        <button class="pg-mode-btn" data-mode="local">💻 Local (Simulasi Offline)</button>
+                    </div>
+                    
+                    <!-- Cloud Config (hidden in local mode) -->
+                    <div id="pg-cloud-config" class="pg-config">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pg-platform">Platform</label>
+                                <select id="pg-platform" class="form-select">
+                                    <option value="gemini">🏛️ Gemini 3.5 Flash</option>
+                                    <option value="claude">🦉 Claude Sonnet 5</option>
+                                    <option value="deepseek">🐉 DeepSeek V4-Pro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pg-api-key">API Key</label>
+                                <input type="password" id="pg-api-key" class="form-input" placeholder="Masukkan API key anda">
+                                <small class="form-hint">Kunci disimpan dalam localStorage. Tidak dihantar ke mana-mana pelayan lain.</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Editor + Output Grid -->
+                    <div class="pg-grid">
+                        <div class="pg-editor-panel">
+                            <div class="pg-editor-header">
+                                <span class="pg-filename">agent.py</span>
+                                <button id="pg-reset-btn" class="btn btn-outline btn-sm">↺ Reset</button>
+                            </div>
+                            <textarea id="pg-editor" class="pg-code-editor" spellcheck="false"></textarea>
+                        </div>
+                        <div class="pg-output-panel">
+                            <div class="pg-output-header">
+                                <span>Output / Terminal</span>
+                                <button id="pg-clear-output" class="btn btn-outline btn-sm">Clear</button>
+                            </div>
+                            <div id="pg-output" class="pg-terminal">
+                                <div class="pg-welcome">Sedia. Pilih mod dan tekan <strong>Run</strong>.</div>
+                            </div>
+                            <div class="pg-output-footer">
+                                <button id="pg-run-btn" class="btn btn-primary btn-lg">▶️ Run</button>
+                                <span id="pg-status" class="pg-status-text"></span>
+                                <span id="pg-cost" class="pg-cost-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- LEARNING PATHS (TABS) -->
+        <!-- ============================================================ -->
+        <section id="learning-paths" class="learning-section">
+            <div class="container">
+                <h2 class="section-title">🗺️ Laluan Pembelajaran 3 Fasa</h2>
+                <p class="section-subtitle">Setiap akademi mengikut perkembangan Fasa 1 → 2 → 3.</p>
+                
+                <div class="tab-container">
+                    <div class="tab-nav" role="tablist">
+                        <button class="tab-btn active" data-tab="tab-google-path" role="tab" aria-selected="true">🏛️ Google</button>
+                        <button class="tab-btn" data-tab="tab-claude-path" role="tab" aria-selected="false">🦉 Claude</button>
+                        <button class="tab-btn" data-tab="tab-deepseek-path" role="tab" aria-selected="false">🐉 DeepSeek</button>
+                    </div>
+                    
+                    <!-- Google Path -->
+                    <div class="tab-panel active" id="tab-google-path" role="tabpanel">
+                        <div class="learning-cards">
+                            <div class="learn-card">
+                                <h4>Fasa 1G</h4>
+                                <p>Integrasi Asas & System Instructions</p>
+                                <ul>
+                                    <li>SDK Google GenAI</li>
+                                    <li>Penstriman respons</li>
+                                    <li>Arahan sistem</li>
+                                </ul>
+                            </div>
+                            <div class="learn-card">
+                                <h4>Fasa 2G</h4>
+                                <p>Function Calling & Workspace</p>
+                                <ul>
+                                    <li>Alatan Google Workspace</li>
+                                    <li>Gmail, Sheets, Docs</li>
+                                    <li>Context Caching</li>
+                                </ul>
+                            </div>
+                            <div class="learn-card">
+                                <h4>Fasa 3G</h4>
+                                <p>Managed Agents & Automasi Penuh</p>
+                                <ul>
+                                    <li>Antigravity Sandbox</li>
+                                    <li>Ejen dalam Linux terpencil</li>
+                                    <li>Kemahiran tersuai (AGENTS.md)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Claude Path -->
+                    <div class="tab-panel" id="tab-claude-path" role="tabpanel">
+                        <div class="learning-cards">
+                            <div class="learn-card">
+                                <h4>Fasa 1C</h4>
+                                <p>Mesej Asas & Adaptive Thinking</p>
+                                <ul>
+                                    <li>Messages API</li>
+                                    <li>Adaptive / Extended Thinking</li>
+                                    <li>Budget tokens</li>
+                                </ul>
+                            </div>
+                            <div class="learn-card">
+                                <h4>Fasa 2C</h4>
+                                <p>MCP Server & Alatan Tempatan</p>
+                                <ul>
+                                    <li>Model Context Protocol</li>
+                                    <li>Pelayan fail sistem</li>
+                                    <li>Pangkalan data tempatan</li>
+                                </ul>
+                            </div>
+                            <div class="learn-card">
+                                <h4>Fasa 3C</h4>
+                                <p>Pasukan Ejen (Dev Team)</p>
+                                <ul>
+                                    <li>Coordinator (Opus)</li>
+                                    <li>Coder + Reviewer (Sonnet)</li>
+                                    <li>Kitaran semakan kualiti</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- DeepSeek Path -->
+                    <div class="tab-panel" id="tab-deepseek-path" role="tabpanel">
+                        <div class="learning-cards">
+                            <div class="learn-card">
+                                <h4>Fasa 1D</h4>
+                                <p>API Serasi OpenAI & Parser CoT</p>
+                                <ul>
+                                    <li>Klien OpenAI</li>
+                                    <li>Model R1 (Chain-of-Thought)</li>
+                                    <li>Parser tag &lt;think&gt;</li>
+                                </ul>
+                            </div>
+                            <div class="learn-card">
+                                <h4>Fasa 2D</h4>
+                                <p>Memori Engram & Redis</p>
+                                <ul>
+                                    <li>Redis cache luaran</li>
+                                    <li>Engram Memory System</li>
+                                    <li>Konteks 1M token efisien</li>
+                                </ul>
+                            </div>
+                            <div class="learn-card">
+                                <h4>Fasa 3D</h4>
+                                <p>Automasi Skala Besar</p>
+                                <ul>
+                                    <li>Pemprosesan kelompok</li>
+                                    <li>Kos ultra rendah</li>
+                                    <li>Rangkaian ejen komersial</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ARCHITECTURE INTERACTIVE DIAGRAM -->
+        <!-- ============================================================ -->
+        <section id="architecture-visual" class="architecture-section">
+            <div class="container">
+                <h2 class="section-title">🏗️ Visual Seni Bina Ejen</h2>
+                <p class="section-subtitle">Hover pada nod untuk melihat peranan setiap komponen.</p>
+                <div class="architecture-diagram" id="architecture-diagram">
+                    <div class="arch-node google-node" data-description="Gemini API memproses teks + multimodal. Menghantar function call ke Antigravity." style="top:20px; left:20px;">Gemini API</div>
+                    <div class="arch-node" data-description="Antigravity Interaction Manager: Menguruskan sandbox Linux dan Google Workspace." style="top:20px; left:200px;">Antigravity</div>
+                    <div class="arch-node claude-node" data-description="Claude Opus sebagai Coordinator: Membahagikan tugas kepada sub-ejen." style="top:100px; left:20px;">Coordinator (Opus)</div>
+                    <div class="arch-node" data-description="Sub-ejen Coder (Sonnet): Menulis kod melalui MCP." style="top:100px; left:200px;">Coder (Sonnet)</div>
+                    <div class="arch-node deepseek-node" data-description="DeepSeek V4-Pro: MoE 384 pakar, hanya 6 aktif per token." style="top:180px; left:20px;">V4-Pro MoE</div>
+                    <div class="arch-node" data-description="Redis / Engram Memory: Cache luaran untuk 1M token." style="top:180px; left:200px;">Engram Memory</div>
+                    <div id="arch-tooltip" class="arch-tooltip" style="display:none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- PROGRESS TRACKER (contoh untuk Google) -->
+        <!-- ============================================================ -->
+        <section class="progress-section">
+            <div class="container">
+                <h2 class="section-title">✅ Jejak Kemajuan Anda</h2>
+                <div class="progress-tracker" id="progress-tracker">
+                    <div class="progress-step" data-step="google-fasa1">
+                        <label class="step-label">
+                            <input type="checkbox" class="step-checkbox"> 
+                            🏛️ Google Fasa 1: Integrasi Asas
+                        </label>
+                    </div>
+                    <div class="progress-step" data-step="google-fasa2">
+                        <label class="step-label">
+                            <input type="checkbox" class="step-checkbox"> 
+                            🏛️ Google Fasa 2: Function Calling
+                        </label>
+                    </div>
+                    <div class="progress-step" data-step="google-fasa3">
+                        <label class="step-label">
+                            <input type="checkbox" class="step-checkbox"> 
+                            🏛️ Google Fasa 3: Managed Agents
+                        </label>
+                    </div>
+                    <div class="progress-step" data-step="claude-fasa1">
+                        <label class="step-label">
+                            <input type="checkbox" class="step-checkbox"> 
+                            🦉 Claude Fasa 1: Messages API
+                        </label>
+                    </div>
+                    <div class="progress-step" data-step="claude-fasa2">
+                        <label class="step-label">
+                            <input type="checkbox" class="step-checkbox"> 
+                            🦉 Claude Fasa 2: MCP Server
+                        </label>
+                    </div>
+                    <div class="progress-step" data-step="deepseek-fasa1">
+                        <label class="step-label">
+                            <input type="checkbox" class="step-checkbox"> 
+                            🐉 DeepSeek Fasa 1: API & Parser
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-outline" onclick="localStorage.removeItem('orchestra-progress'); location.reload();">Reset Kemajuan</button>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- TESTIMONIAL / CTA -->
+        <!-- ============================================================ -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="section-title">Sertai Komuniti Pembangun Ejen AI</h2>
+                <p class="cta-text">Komuniti sumber terbuka dari Malaysia, Asia Tenggara, dan seluruh dunia.</p>
+                <div class="cta-buttons">
+                    <a href="https://discord.gg/example" class="btn btn-discord btn-lg" target="_blank" rel="noopener">💬 Discord</a>
+                    <a href="https://github.com/state-of-protocol/AI-Orchestration-Tutorial" class="btn btn-github btn-lg" target="_blank" rel="noopener">⭐ Star di GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================================ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>🎻 Orchestra AI</h4>
+                    <p>Tutorial pembinaan ejen AI autonomi. Sumber terbuka, dikemas kini untuk landskap AI 2026.</p>
+                    <p class="footer-license">Dilesenkan di bawah <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#" data-platform="google">🏛️ Google AI Studio</a></li>
+                        <li><a href="#" data-platform="claude">🦉 Anthropic Claude</a></li>
+                        <li><a href="#" data-platform="deepseek">🐉 DeepSeek</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Dokumentasi</h4>
+                    <ul>
+                        <li><a href="https://github.com/state-of-protocol/AI-Orchestration-Tutorial#readme">README</a></li>
+                        <li><a href="https://github.com/state-of-protocol/AI-Orchestration-Tutorial/blob/main/SKILL.md">SKILL.md</a></li>
+                        <li><a href="https://github.com/state-of-protocol/AI-Orchestration-Tutorial/blob/main/STRUCTURE.md">STRUCTURE.md</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Komuniti</h4>
+                    <ul>
+                        <li><a href="https://github.com/state-of-protocol">GitHub</a></li>
+                        <li><a href="https://discord.gg/example">Discord</a></li>
+                        <li><a href="https://twitter.com/example">Twitter / X</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 State of Protocol. Dibina dengan ❤️ di Malaysia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================================ -->
+    <script src="js/script.js"></script>
+    <script>
+        // Mobile menu toggle (basic functionality if not in script.js)
+        document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
+            const nav = document.querySelector('.main-nav');
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            nav.classList.toggle('mobile-open');
+            this.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
