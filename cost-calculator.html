@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ms" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Kos Token — Orchestra AI</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --success: #3fb950;
+            --danger: #f85149;
+            --google: #4285F4;
+            --claude: #D97706;
+            --deepseek: #059669;
+            --radius: 10px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        [data-theme="light"] {
+            --bg: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #eaeef2;
+            --border: #d0d7de;
+            --text: #1f2328;
+            --text-secondary: #656d76;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.2s, color 0.2s;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem 1rem;
+        }
+        .calculator-wrapper {
+            width: 100%;
+            max-width: 950px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .grid-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 700px) {
+            .grid-main { grid-template-columns: 1fr; }
+            .calculator-wrapper { padding: 1.25rem; }
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            font-size: 0.95rem;
+        }
+        select, input[type="number"] {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        input[type="range"] {
+            width: 100%;
+            margin-top: 0.25rem;
+            accent-color: var(--accent);
+        }
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            background-color: var(--bg-tertiary);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .toggle-switch.active { background-color: var(--success); }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px; left: 2px;
+            transition: transform 0.2s;
+        }
+        .toggle-switch.active::after { transform: translateX(18px); }
+        .presets {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .preset-btn {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover { background-color: var(--accent); color: white; border-color: var(--accent); }
+        .results {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .cost-main {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .cost-myr {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .savings {
+            margin-top: 1rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+        .comparison-chart {
+            margin-top: 2rem;
+        }
+        .chart-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        canvas {
+            width: 100%;
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .note {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="calculator-wrapper">
+    <button class="theme-toggle" id="themeToggle">🌓 Tukar Tema</button>
+    <h1>💰 Kalkulator Kos Token</h1>
+    <p class="subtitle">Bandingkan kos penggunaan API untuk pelbagai platform AI (data Mei 2026).</p>
+
+    <div class="grid-main">
+        <div>
+            <div class="form-group">
+                <label for="modelSelect">Model / Platform</label>
+                <select id="modelSelect">
+                    <option value="google-flash">🏛️ Google Gemini 3.5 Flash</option>
+                    <option value="google-pro">🏛️ Google Gemini 3.5 Pro</option>
+                    <option value="claude-sonnet">🦉 Claude Sonnet 5</option>
+                    <option value="claude-opus">🦉 Claude Opus 4.7</option>
+                    <option value="deepseek-v4" selected>🐉 DeepSeek V4-Pro</option>
+                    <option value="deepseek-r1">🐉 DeepSeek R1</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="inputTokens">Token Input</label>
+                <input type="number" id="inputTokens" value="10000" min="0" max="10000000" step="1000">
+                <input type="range" id="inputRange" value="10000" min="0" max="10000000" step="1000">
+            </div>
+
+            <div class="form-group">
+                <label for="outputTokens">Token Output</label>
+                <input type="number" id="outputTokens" value="2000" min="0" max="1000000" step="100">
+                <input type="range" id="outputRange" value="2000" min="0" max="1000000" step="100">
+            </div>
+
+            <div class="form-group">
+                <label class="toggle-label" id="cacheToggleLabel">
+                    <div class="toggle-switch active" id="cacheToggle"></div>
+                    Gunakan Cache (jimat ~80% pada input)
+                </label>
+            </div>
+
+            <div class="presets">
+                <span style="color:var(--text-secondary); font-size:0.85rem;">Pratetap:</span>
+                <button class="preset-btn" data-input="5000" data-output="500">Kecil</button>
+                <button class="preset-btn" data-input="100000" data-output="5000">Sederhana</button>
+                <button class="preset-btn" data-input="1000000" data-output="50000">Besar</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="results">
+                <div style="color:var(--text-secondary); margin-bottom:0.5rem;">Anggaran Kos</div>
+                <div class="cost-main" id="costUSD">$0.0000</div>
+                <div class="cost-myr" id="costMYR">RM 0.0000</div>
+                <div class="savings" id="savingsNote"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="comparison-chart">
+        <div class="chart-title">📊 Perbandingan Kos untuk Input Semasa</div>
+        <canvas id="comparisonCanvas" height="300"></canvas>
+    </div>
+    <div class="note">
+        * Harga berdasarkan data API rasmi Mei 2026. Kadar tukaran 1 USD = 4.70 MYR. 
+        <br>DeepSeek V4-Pro menikmati diskaun kekal 75% selepas 31 Mei 2026.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Harga per 1 juta token (USD)
+        const pricing = {
+            'google-flash': { name: 'Gemini 3.5 Flash', input: 0.15, output: 0.60, cacheHit: 0.0375, color: '#4285F4' },
+            'google-pro': { name: 'Gemini 3.5 Pro', input: 1.25, output: 5.00, cacheHit: 0.3125, color: '#4285F4' },
+            'claude-sonnet': { name: 'Claude Sonnet 5', input: 3.00, output: 15.00, cacheHit: 0.30, color: '#D97706' },
+            'claude-opus': { name: 'Claude Opus 4.7', input: 15.00, output: 75.00, cacheHit: 1.50, color: '#D97706' },
+            'deepseek-v4': { name: 'DeepSeek V4-Pro', input: 0.015, output: 0.87, cacheHit: 0.0036, color: '#059669' },
+            'deepseek-r1': { name: 'DeepSeek R1', input: 0.55, output: 2.19, cacheHit: 0.14, color: '#059669' },
+        };
+
+        const usdToMyr = 4.70;
+
+        // Elemen DOM
+        const modelSelect = document.getElementById('modelSelect');
+        const inputTokensNum = document.getElementById('inputTokens');
+        const inputRange = document.getElementById('inputRange');
+        const outputTokensNum = document.getElementById('outputTokens');
+        const outputRange = document.getElementById('outputRange');
+        const cacheToggle = document.getElementById('cacheToggle');
+        const cacheToggleLabel = document.getElementById('cacheToggleLabel');
+        const costUSD = document.getElementById('costUSD');
+        const costMYR = document.getElementById('costMYR');
+        const savingsNote = document.getElementById('savingsNote');
+        const canvas = document.getElementById('comparisonCanvas');
+        const ctx = canvas.getContext('2d');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // State
+        let useCache = true;
+
+        // Fungsi kemas kini UI
+        function updateCalculator() {
+            const modelKey = modelSelect.value;
+            const model = pricing[modelKey];
+            const inputTokens = parseInt(inputTokensNum.value) || 0;
+            const outputTokens = parseInt(outputTokensNum.value) || 0;
+
+            const inputRate = useCache ? model.cacheHit : model.input;
+            const inputCost = (inputTokens / 1_000_000) * inputRate;
+            const outputCost = (outputTokens / 1_000_000) * model.output;
+            const totalCost = inputCost + outputCost;
+
+            costUSD.textContent = `$${totalCost.toFixed(6)}`;
+            costMYR.textContent = `RM ${(totalCost * usdToMyr).toFixed(4)}`;
+
+            // Nota penjimatan khas DeepSeek
+            if (modelKey.startsWith('deepseek')) {
+                // Banding dengan Claude Sonnet sebagai baseline
+                const baselineInput = (inputTokens / 1_000_000) * 3.0;
+                const baselineOutput = (outputTokens / 1_000_000) * 15.0;
+                const baseline = baselineInput + baselineOutput;
+                const saving = baseline > 0 ? ((baseline - totalCost) / baseline * 100).toFixed(0) : 0;
+                let discountNote = '';
+                if (modelKey === 'deepseek-v4') {
+                    discountNote = ' 🎉 Harga selepas diskaun kekal 75% (berkuat kuasa selepas 31 Mei 2026).';
+                }
+                savingsNote.style.display = 'block';
+                savingsNote.innerHTML = `💰 Menjimatkan ~${saving}% berbanding alternatif Barat untuk beban kerja yang sama.${discountNote}`;
+            } else {
+                savingsNote.style.display = 'none';
+            }
+
+            // Segerakkan input range <-> number
+            inputRange.value = inputTokens;
+            outputRange.value = outputTokens;
+
+            drawChart(inputTokens, outputTokens, useCache);
+        }
+
+        function drawChart(inputTokens, outputTokens, cache) {
+            const width = canvas.width = canvas.clientWidth;
+            const height = canvas.height = 300;
+            ctx.clearRect(0, 0, width, height);
+
+            const models = Object.keys(pricing);
+            const costs = models.map(key => {
+                const m = pricing[key];
+                const inRate = cache ? m.cacheHit : m.input;
+                return (inputTokens / 1_000_000) * inRate + (outputTokens / 1_000_000) * m.output;
+            });
+
+            const maxCost = Math.max(...costs, 0.01);
+            const barWidth = (width - 80) / models.length - 10;
+            const startX = 60;
+
+            // Grid horizontal
+            ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border').trim() || '#30363d';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i <= 5; i++) {
+                const y = 20 + (height - 40) * (i / 5);
+                ctx.beginPath();
+                ctx.moveTo(startX, y);
+                ctx.lineTo(width - 20, y);
+                ctx.stroke();
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim() || '#8b949e';
+                ctx.font = '10px Inter, sans-serif';
+                ctx.fillText('$' + (maxCost * (1 - i/5)).toFixed(4), 10, y + 4);
+            }
+
+            models.forEach((key, i) => {
+                const cost = costs[i];
+                const barH = (cost / maxCost) * (height - 60);
+                const x = startX + i * (barWidth + 10);
+                const y = height - 30 - barH;
+
+                ctx.fillStyle = pricing[key].color;
+                ctx.fillRect(x, y, barWidth, barH);
+
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#e6edf3';
+                ctx.font = '11px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(pricing[key].name.split(' ')[0], x + barWidth/2, height - 10);
+                ctx.fillText('$' + cost.toFixed(5), x + barWidth/2, y - 6);
+            });
+        }
+
+        // Event listeners
+        modelSelect.addEventListener('change', updateCalculator);
+        inputTokensNum.addEventListener('input', updateCalculator);
+        outputTokensNum.addEventListener('input', updateCalculator);
+        inputRange.addEventListener('input', function() {
+            inputTokensNum.value = this.value;
+            updateCalculator();
+        });
+        outputRange.addEventListener('input', function() {
+            outputTokensNum.value = this.value;
+            updateCalculator();
+        });
+
+        cacheToggleLabel.addEventListener('click', function(e) {
+            e.preventDefault();
+            useCache = !useCache;
+            cacheToggle.classList.toggle('active', useCache);
+            updateCalculator();
+        });
+
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const inp = parseInt(this.dataset.input);
+                const out = parseInt(this.dataset.output);
+                inputTokensNum.value = inp;
+                outputTokensNum.value = out;
+                inputRange.value = inp;
+                outputRange.value = out;
+                updateCalculator();
+            });
+        });
+
+        // Tema
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            themeToggle.textContent = next === 'dark' ? '🌙 Tema Gelap' : '☀️ Tema Cerah';
+            updateCalculator(); // redraw chart with new colors
+        });
+
+        // Inisialisasi
+        updateCalculator();
+        window.addEventListener('resize', () => {
+            drawChart(parseInt(inputTokensNum.value)||0, parseInt(outputTokensNum.value)||0, useCache);
+        });
+    })();
+</script>
+</body>
+</html>
